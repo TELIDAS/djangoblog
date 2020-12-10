@@ -2,12 +2,14 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
+from posts.models import Post
+
+
 @csrf_exempt
 def get_posts(request):
     method_post = request.method
     if method_post == 'POST':
-        return HttpResponse('Post on my profile')
-    if method_post == 'PUT':
+        post = Post.objects.create(title="Good Morning", description="Have a good day")
         return HttpResponse('Put the information to my profile')
     if method_post == 'GET':
         return HttpResponse('Get the information from my profile')
