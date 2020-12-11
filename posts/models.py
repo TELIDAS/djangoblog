@@ -9,3 +9,13 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.title} {self.description} {self.date_added}'
+
+class Profile(models.Model):
+    name = models.CharField(max_length=50)
+    sex = models.CharField(max_length=15)
+    age = models.IntegerField()
+    hobby = models.TextField()
+
+    def __str__(self):
+        return f'{self.name} {self.sex} {self.age} {self.hobby}'
+
