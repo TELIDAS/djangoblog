@@ -18,4 +18,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.sex} {self.age} {self.hobby}'
-

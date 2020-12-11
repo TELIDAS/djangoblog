@@ -47,7 +47,7 @@ def get_profile(request):
         saved_profile = Profile.objects.all()
         return HttpResponse(saved_profile)
     if method_profile == 'DELETE':
-        profile = Profile.objects.get(pk=int())
+        profile = Profile.objects.get(pk=1)
         profile.delete()
         return HttpResponse('Profile deleted')
     return HttpResponse('My profile')
