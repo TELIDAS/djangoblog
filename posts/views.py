@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
@@ -51,3 +52,18 @@ def get_profile(request):
         profile.delete()
         return HttpResponse('Profile deleted')
     return HttpResponse('My profile')
+
+
+def get_real_posts(request):
+    context = {
+        'posts': Post.objects.all()
+    }
+
+    return render(request, 'posts/index.html', context)
+
+def get_real_posts_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    context = {
+        'post': post
+    }
+    return render(request, 'posts/detail.html', context)
