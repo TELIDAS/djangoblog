@@ -13,12 +13,8 @@
             <li class='post'>
                 <img class="post-image" src="{{ i.image.url }}" alt="">
                 <h2>{{ i.title }}</h2>
-                <p class="post-description">
-                    {{ i.description }}
-                </p>
-                <span class="post-date">
-                    {{ i.date_added }}
-                </span>
+                <p class="post-description">{{ i.description }}</p>
+                <span class="post-date">{{ i.date_added }}</span>
             </li>
             {% endfor %}
         </ul>
