@@ -1,8 +1,8 @@
-.profile {
-    background-color: black;
-    color: white;
+.profile{
+    background-color: white;
+    color: black;
+    font-size: 40px;
 }
-
 .profile-image{
     width: 500px;
     height: 500px;

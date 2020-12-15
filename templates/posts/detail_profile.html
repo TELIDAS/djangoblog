@@ -1,11 +1,8 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ profile.name }}</title>
-        <link rel="stylesheet" href="{% static 'style_profile.css' %}">
-
 </head>
 <body>
     <div>
@@ -14,6 +11,7 @@
         <p>{{ profile.sex }}</p>
         <img src="{{ profile.image.url }}" alt="">
         <p>{{ profile.hobby }}</p>
+        <p>{{ profile.about }}</p>
     </div>
 </body>
 </html>
