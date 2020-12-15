@@ -17,6 +17,8 @@ class Profile(models.Model):
     sex = models.CharField(max_length=15)
     age = models.IntegerField()
     hobby = models.TextField()
+    image = models.ImageField(upload_to='posts/', null=True)
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return f'{self.name} {self.sex} {self.age} {self.hobby}'

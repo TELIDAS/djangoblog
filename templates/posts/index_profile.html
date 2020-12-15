@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div>
+        <ul>
+            {% for i in profile %}
+                <li>
+                    <img class="profile-image" src="{{ i.image.url }}" alt="">
+                <h2>{{ i.name }}</h2>
+                <p class="profile-age">{{ i.age }}</p>
+                <p class="profile-sex">{{ i.sex }}</p>
+                <p class="profile-hobby">{{ i.hobby }}</p>
+                <span class="profile-added">{{ i.date_added }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

@@ -67,3 +67,16 @@ def get_real_posts_detail(request, pk):
         'post': post
     }
     return render(request, 'posts/detail.html', context)
+
+def get_real_profile(request):
+    context = {
+        'profile': Profile.objects.all()
+    }
+    return render(request, 'posts/index_profile.html', context)
+
+def get_real_profile_detail(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    context = {
+        'profile': profile
+    }
+    return render(request, 'posts/detail_profile.html', context)
