@@ -1,13 +1,10 @@
-
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
-from django.views.generic import TemplateView, ListView, DetailView
-
-from posts.models import Post
 from posts.forms import PostForm
+from posts.models import Post
 
 @csrf_exempt
 def get_posts(request):
@@ -69,7 +66,7 @@ def add_post(request):
                             description=form.data['description'],
                             image=form.data['image'],
                             text=form.data['text'])
-        return HttpResponse('Post Created successfully')
+        return HttpResponse('Post Created Successfully')
     else:
         form = PostForm()
     return render(request, 'posts/add_post.html', {'form': form})
