@@ -1,10 +1,13 @@
+
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
-from posts.models import Post, Profile
+from django.views.generic import TemplateView, ListView, DetailView
 
+from posts.models import Post
+from posts.forms import PostForm
 
 @csrf_exempt
 def get_posts(request):
@@ -29,54 +32,44 @@ def get_posts(request):
     return HttpResponse('Hi master, i\'m working!')
 
 
-@csrf_exempt
-def get_profile(request):
-    method_profile = request.method
-    print(method_profile)
-    if method_profile == 'POST':
-        profile = Profile.objects.create(name='Arata', sex='male', age=23, hobby='reading books')
-        return HttpResponse('Created new profile')
-    if method_profile in ['PUT', 'PATCH']:
-        profile = Profile.objects.create(name='Arata', sex='male', age=23, hobby='reading books')
-        profile.name = "Miko"
-        profile.age = 19
-        profile.sex = 'female'
-        profile.hobby = 'dancing'
-        profile.save()
-        return HttpResponse('Put the information to my profile')
-    if method_profile == 'GET':
-        saved_profile = Profile.objects.all()
-        return HttpResponse(saved_profile)
-    if method_profile == 'DELETE':
-        profile = Profile.objects.get(pk=1)
-        profile.delete()
-        return HttpResponse('Profile deleted')
-    return HttpResponse('My profile')
+
+class PostsView(ListView):
+    model = Post
+    template_name = 'posts/index.html'
+
+    def get_queryset(self):
+        return Post.objects.all()
+
+# def get_real_posts(request):
+#     context = {
+#         'posts': Post.objects.all()
+#     }
+#
+#     return render(request, 'posts/index.html', context)
+#
 
 
-def get_real_posts(request):
-    context = {
-        'posts': Post.objects.all()
-    }
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'posts/detail.html'
+#
+# def get_real_posts_detail(request, pk):
+#     post = get_object_or_404(Post, pk=pk)
+#     context = {
+#         'post': post
+#     }
+#     return render(request, 'posts/detail.html', context)
 
-    return render(request, 'posts/index.html', context)
-
-def get_real_posts_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    context = {
-        'post': post
-    }
-    return render(request, 'posts/detail.html', context)
-
-def get_real_profile(request):
-    context = {
-        'profile': Profile.objects.all()
-    }
-    return render(request, 'posts/index_profile.html', context)
-
-def get_real_profile_detail(request, pk):
-    profile = get_object_or_404(Profile, pk=pk)
-    context = {
-        'profile': profile
-    }
-    return render(request, 'posts/detail_profile.html', context)
+def add_post(request):
+    method = request.method
+    if method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        print(form.data)
+        Post.objects.create(title=form.data['title'],
+                            description=form.data['description'],
+                            image=form.data['image'],
+                            text=form.data['text'])
+        return HttpResponse('Post Created successfully')
+    else:
+        form = PostForm()
+    return render(request, 'posts/add_post.html', {'form': form})

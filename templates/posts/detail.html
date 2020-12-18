@@ -5,12 +5,15 @@
     <title>{{ post.title }}</title>
 </head>
 <body>
+    <header>
+        {% include 'posts/header.html' %}
+    </header>
     <div>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.description }}</p>
-        <p>{{ post.date_added }}</p>
-        <img src="{{ post.image.url }}" alt="">
-        <p>{{ post.text }}</p>
+        <h2>{{ object.title }}</h2>
+        <p>{{ object.description }}</p>
+        <p>{{ object.date_added }}</p>
+        <img src="{{ object.image.url }}" alt="">
+        <p>{{ object.text }}</p>
     </div>
 </body>
 </html>
